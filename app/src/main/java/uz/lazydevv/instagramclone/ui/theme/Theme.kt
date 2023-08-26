@@ -67,10 +67,10 @@ fun InstagramCloneTheme(
         SideEffect {
             val window = (view.context as Activity).window
 
-            window.statusBarColor = myColorScheme.primary.toArgb()
+            window.statusBarColor = myColorScheme.background.toArgb()
             window.navigationBarColor = myColorScheme.background.toArgb()
 
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
             WindowCompat.getInsetsController(window, view).isAppearanceLightNavigationBars = !darkTheme
         }
     }
