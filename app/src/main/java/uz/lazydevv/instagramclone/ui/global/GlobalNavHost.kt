@@ -5,7 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import uz.lazydevv.instagramclone.ui.global.bottomnav.BottomNavScreen
-import uz.lazydevv.instagramclone.ui.global.messages.MessagesScreen
+import uz.lazydevv.instagramclone.ui.global.messenger.MessengerScreen
 
 @Composable
 fun GlobalNavHost(navController: NavHostController) {
@@ -17,8 +17,8 @@ fun GlobalNavHost(navController: NavHostController) {
             BottomNavScreen()
         }
 
-        composable(GlobalScreens.Messages.route) {
-            MessagesScreen()
+        composable(GlobalScreens.Messenger.route) {
+            MessengerScreen()
         }
     }
 }
