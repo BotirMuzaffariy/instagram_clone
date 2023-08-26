@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import uz.lazydevv.instagramclone.ui.global.bottomnav.BottomNavScreen
+import androidx.navigation.compose.rememberNavController
 import uz.lazydevv.instagramclone.ui.theme.InstagramCloneTheme
 
 class GlobalActivity : ComponentActivity() {
@@ -15,7 +15,8 @@ class GlobalActivity : ComponentActivity() {
 
         setContent {
             InstagramCloneTheme {
-                BottomNavScreen()
+                val navController = rememberNavController()
+                GlobalNavHost(navController)
             }
         }
     }
@@ -25,6 +26,6 @@ class GlobalActivity : ComponentActivity() {
 @Composable
 private fun GreetingPreview() {
     InstagramCloneTheme {
-        BottomNavScreen()
+        GlobalNavHost(rememberNavController())
     }
 }
