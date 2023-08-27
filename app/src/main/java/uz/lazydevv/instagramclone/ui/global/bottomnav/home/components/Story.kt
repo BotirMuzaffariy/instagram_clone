@@ -10,7 +10,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -23,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import uz.lazydevv.instagramclone.R
+import uz.lazydevv.instagramclone.ui.theme.Colors
 
 @Composable
 fun Story(
@@ -40,7 +42,11 @@ fun Story(
                 .size(86.dp)
                 .border(
                     width = if (shouldShowAddStory) (-1).dp else (2.5).dp,
-                    color = Color.Red,
+                    brush = Brush.linearGradient(
+                        colors = listOf(Colors.primaryYellow, Colors.primaryOrange, Colors.primaryPurple),
+                        start = Offset(0f, Float.POSITIVE_INFINITY),
+                        end = Offset(Float.POSITIVE_INFINITY, 0f)
+                    ),
                     shape = CircleShape
                 )
                 .padding(6.dp)
