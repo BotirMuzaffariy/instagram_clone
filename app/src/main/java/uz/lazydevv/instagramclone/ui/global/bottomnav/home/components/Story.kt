@@ -1,18 +1,11 @@
 package uz.lazydevv.instagramclone.ui.global.bottomnav.home.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -24,54 +17,26 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import uz.lazydevv.instagramclone.R
-import uz.lazydevv.instagramclone.ui.theme.Colors
+import uz.lazydevv.instagramclone.models.StoryM
+import uz.lazydevv.instagramclone.utils.MockData
 
 @Composable
-fun Story(
-    item: String,
-    shouldShowAddStory: Boolean = false
-) {
+fun Story(story: StoryM) {
     ConstraintLayout(
         modifier = Modifier
-            .padding(6.dp, 6.dp)
+            .padding(6.dp)
     ) {
-        val (tvName, ivAvatar, vSeenStatus, ivAdd) = createRefs()
+        val (tvName, ivAvatar, ivAdd) = createRefs()
 
-        Box(
-            modifier = Modifier
-                .size(86.dp)
-                .border(
-                    width = if (shouldShowAddStory) (-1).dp else (2.5).dp,
-                    brush = Brush.linearGradient(
-                        colors = listOf(Colors.primaryYellow, Colors.primaryOrange, Colors.primaryPurple),
-                        start = Offset(0f, Float.POSITIVE_INFINITY),
-                        end = Offset(Float.POSITIVE_INFINITY, 0f)
-                    ),
-                    shape = CircleShape
-                )
-                .padding(6.dp)
-                .constrainAs(vSeenStatus) {}
+        StoryAvatar(
+            modifier = Modifier.constrainAs(ivAvatar) {},
+            avatarImg = story.user.avatarImg,
+            avatarSize = StoryAvatarSize.LARGE,
+            shouldShowStoryCircle = !story.isEmpty,
+            isSeen = story.isSeen
         )
 
-        Image(
-            painter = painterResource(id = R.drawable.img_profile),
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .constrainAs(ivAvatar) {
-                    width = Dimension.fillToConstraints
-                    height = Dimension.fillToConstraints
-
-                    start.linkTo(vSeenStatus.start)
-                    end.linkTo(vSeenStatus.end)
-                    bottom.linkTo(vSeenStatus.bottom)
-                    top.linkTo(vSeenStatus.top)
-                }
-                .padding(6.dp)
-                .clip(CircleShape)
-        )
-
-        if (shouldShowAddStory) {
+        if (story.isEmpty) {
             Image(
                 painter = painterResource(id = R.drawable.add_story_badge),
                 contentDescription = null,
@@ -85,7 +50,7 @@ fun Story(
         }
 
         Text(
-            text = if (shouldShowAddStory) stringResource(id = R.string.your_story) else item,
+            text = if (story.isEmpty) stringResource(id = R.string.your_story) else story.user.username,
             fontSize = 13.sp,
             maxLines = 1,
             fontWeight = FontWeight(450),
@@ -94,9 +59,9 @@ fun Story(
             modifier = Modifier.constrainAs(tvName) {
                 width = Dimension.fillToConstraints
 
-                start.linkTo(vSeenStatus.start)
-                end.linkTo(vSeenStatus.end)
-                top.linkTo(vSeenStatus.bottom)
+                start.linkTo(ivAvatar.start)
+                end.linkTo(ivAvatar.end)
+                top.linkTo(ivAvatar.bottom)
             }
         )
     }
@@ -105,5 +70,5 @@ fun Story(
 @Preview(showBackground = true)
 @Composable
 private fun StoryPreview() {
-    Story("lazydevv")
+    Story(MockData.stories[0])
 }

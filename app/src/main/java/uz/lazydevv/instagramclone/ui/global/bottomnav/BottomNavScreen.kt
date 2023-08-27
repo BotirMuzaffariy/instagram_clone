@@ -150,7 +150,7 @@ private fun BottomNavigationItem(
             ) {
                 Image(
                     modifier = Modifier.clip(CircleShape),
-                    painter = painterResource(id = R.drawable.img_profile),
+                    painter = painterResource(id = R.drawable.sample_profile_img1),
                     contentDescription = null,
                     contentScale = ContentScale.Crop
                 )
