@@ -2,6 +2,7 @@ package uz.lazydevv.instagramclone.ui.global.bottomnav.search
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
@@ -12,7 +13,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
@@ -32,6 +32,7 @@ import uz.lazydevv.instagramclone.R
 import uz.lazydevv.instagramclone.models.MediaM
 import uz.lazydevv.instagramclone.ui.theme.Colors
 import uz.lazydevv.instagramclone.utils.MockData
+import kotlin.random.Random
 
 private val contentSpacing = 2.dp
 
@@ -99,6 +100,7 @@ private fun SearchMediaItem(
 
         SquareMediaItem(
             image = items.getOrNull(0)?.postImg,
+            isShowVideoIcon = Random.nextBoolean(),
             modifier = Modifier.constrainAs(content1) {
                 width = Dimension.fillToConstraints
 
@@ -115,6 +117,7 @@ private fun SearchMediaItem(
 
         SquareMediaItem(
             image = items.getOrNull(1)?.postImg,
+            isShowVideoIcon = Random.nextBoolean(),
             modifier = Modifier.constrainAs(content2) {
                 width = Dimension.fillToConstraints
 
@@ -131,6 +134,7 @@ private fun SearchMediaItem(
 
         SquareMediaItem(
             image = items.getOrNull(2)?.postImg,
+            isShowVideoIcon = Random.nextBoolean(),
             modifier = Modifier.constrainAs(content3) {
                 width = Dimension.fillToConstraints
 
@@ -142,6 +146,7 @@ private fun SearchMediaItem(
 
         SquareMediaItem(
             image = items.getOrNull(3)?.postImg,
+            isShowVideoIcon = Random.nextBoolean(),
             modifier = Modifier.constrainAs(content4) {
                 width = Dimension.fillToConstraints
 
@@ -175,28 +180,59 @@ private fun SearchMediaItem(
 @Composable
 private fun SquareMediaItem(
     modifier: Modifier,
-    image: Int?
+    image: Int?,
+    isShowVideoIcon: Boolean = true
 ) {
-    Image(
-        painter = painterResource(id = image ?: R.drawable.sample_img1),
-        contentDescription = null,
-        contentScale = ContentScale.Crop,
-        modifier = modifier
-            .aspectRatio(1f / 1f)
-    )
+    Box(
+        modifier = modifier.aspectRatio(1f / 1f)
+    ) {
+        Image(
+            painter = painterResource(id = image ?: R.drawable.sample_img1),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
+        )
+
+        if (isShowVideoIcon) {
+            Image(
+                painter = painterResource(id = R.drawable.ic_reels_fill_white_gradient),
+                contentDescription = null,
+                modifier = Modifier
+                    .padding(2.dp)
+                    .size(32.dp)
+                    .align(Alignment.TopEnd)
+            )
+        }
+    }
 }
 
 @Composable
 private fun SimpleMediaItem(
     modifier: Modifier,
-    image: Int?
+    image: Int?,
+    isShowVideoIcon: Boolean = true
 ) {
-    Image(
-        painter = painterResource(id = image ?: R.drawable.sample_img1),
-        contentDescription = null,
-        contentScale = ContentScale.Crop,
+    Box(
         modifier = modifier
-    )
+    ) {
+        Image(
+            painter = painterResource(id = image ?: R.drawable.sample_img1),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
+        )
+
+        if (isShowVideoIcon) {
+            Image(
+                painter = painterResource(id = R.drawable.ic_reels_fill_white_gradient),
+                contentDescription = null,
+                modifier = Modifier
+                    .padding(2.dp)
+                    .size(32.dp)
+                    .align(Alignment.TopEnd)
+            )
+        }
+    }
 }
 
 @Preview(showSystemUi = true, device = "id:pixel_3a")
