@@ -15,4 +15,7 @@ object Colors {
     val primaryYellow = Color(0xFFFFD600)
     val primaryOrange = Color(0xFFFF7A00)
     val primaryPurple = Color(0xFFD300C5)
+
+    val bgSearch = Color(0xFFEFEFEF)
+    val onBgSearch = Color(0xFF6C6C6C)
 }
