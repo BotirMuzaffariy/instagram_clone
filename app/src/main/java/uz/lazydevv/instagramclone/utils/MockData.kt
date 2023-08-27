@@ -30,4 +30,12 @@ object MockData {
         MediaM(user4, "", R.drawable.sample_img4, "So angry cat 😁😂", "11-jul, 2023"),
         MediaM(user5, "Dubai, UAE", R.drawable.sample_img5, "Favour is free :)", "29-dec, 2022"),
     )
+
+    val searchMediaItems = rowMediaItems.asSequence().shuffled()
+        .plus(rowMediaItems.shuffled())
+        .plus(rowMediaItems.shuffled())
+        .plus(rowMediaItems.shuffled())
+        .plus(rowMediaItems.shuffled())
+        .plus(rowMediaItems.shuffled())
+        .chunked(5).toList()
 }
