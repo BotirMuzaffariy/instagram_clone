@@ -8,10 +8,10 @@ import uz.lazydevv.instagramclone.models.UserM
 object MockData {
 
     private val user1 = UserM("lazydevv", R.drawable.sample_profile_img1, false)
-    private val user2 = UserM("joxa_203", R.drawable.sample_profile_img2, true)
-    private val user3 = UserM("alimardon_22_31", R.drawable.sample_profile_img3, true)
-    private val user4 = UserM("akbarali", R.drawable.sample_profile_img4, true)
-    private val user5 = UserM("ahror_23", R.drawable.sample_profile_img5, true)
+    private val user2 = UserM("joxa_1909", R.drawable.sample_profile_img2, true)
+    private val user3 = UserM("asilbek_turayev", R.drawable.sample_profile_img3, true)
+    private val user4 = UserM("nazarovakbarali61", R.drawable.sample_profile_img4, true)
+    private val user5 = UserM("alimardon_2231", R.drawable.sample_profile_img5, true)
 
     val users = listOf(user1, user2, user3, user4, user5)
 
@@ -24,10 +24,10 @@ object MockData {
     )
 
     val rowMediaItems = listOf(
-        MediaM(user1, "Muhammad Ali", R.drawable.sample_img1),
-        MediaM(user2, "Stay with Palestine", R.drawable.sample_img2),
-        MediaM(user3, "Qarshi, Uzbekistan", R.drawable.sample_img3),
-        MediaM(user4, "", R.drawable.sample_img4),
-        MediaM(user5, "Dubai, UAE", R.drawable.sample_img5),
+        MediaM(user1, "Muhammad Ali", R.drawable.sample_img1, "Muhammad Ali is the real champion of the whole boxing story 👊😎", "2 hours ago"),
+        MediaM(user2, "Stay with Palestine", R.drawable.sample_img2, "It is so important for us!", "16-aug"),
+        MediaM(user3, "Uzbekistan", R.drawable.sample_img3, "Wise people not always silent, but know when to be.", "13-aug"),
+        MediaM(user4, "", R.drawable.sample_img4, "So angry cat 😁😂", "11-jul, 2023"),
+        MediaM(user5, "Dubai, UAE", R.drawable.sample_img5, "Favour is free :)", "29-dec, 2022"),
     )
 }

@@ -61,6 +61,10 @@ fun HomeScreen() {
             }
 
             RowFeedMedia(mediaItem)
+
+            if (index == MockData.rowMediaItems.lastIndex) {
+                Spacer(modifier = Modifier.height(12.dp))
+            }
         }
     }
 }
