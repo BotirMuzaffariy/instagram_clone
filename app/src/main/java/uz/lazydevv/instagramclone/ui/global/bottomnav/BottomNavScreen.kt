@@ -157,7 +157,7 @@ private fun BottomNavigationItem(
             }
         } else {
             Icon(
-                modifier = Modifier.size(24.dp),
+                modifier = Modifier.size(26.dp),
                 painter = painterResource(
                     id = if (selected) item.focusedIcon else item.icon
                 ),

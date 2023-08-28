@@ -14,7 +14,7 @@ sealed class BottomNavItem(
 
     object Add : BottomNavItem("add", R.drawable.ic_add_box, R.drawable.ic_add_box)
 
-    object Reels : BottomNavItem("reels", R.drawable.ic_reels, R.drawable.ic_reels_filled)
+    object Reels : BottomNavItem("reels", R.drawable.ic_reels, R.drawable.ic_reels_filled2)
 
     object Profile : BottomNavItem("profile", 0, 0)
 }
