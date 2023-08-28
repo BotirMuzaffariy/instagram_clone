@@ -67,6 +67,7 @@ fun StoryAvatar(
 enum class StoryAvatarType(val size: Dp) {
     PROFILE_IMG(80.dp),
     STORY(74.dp),
+    HIGHLIGHT_STORY(62.dp),
     POST_HEADER(30.dp)
 }
 

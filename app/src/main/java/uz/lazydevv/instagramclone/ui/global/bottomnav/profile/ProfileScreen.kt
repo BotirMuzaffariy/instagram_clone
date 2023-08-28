@@ -1,7 +1,9 @@
 package uz.lazydevv.instagramclone.ui.global.bottomnav.profile
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,8 +15,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -304,7 +306,7 @@ private fun HighlightStories(
             ) {
                 StoryAvatar(
                     avatarImg = story.img,
-                    avatarSize = StoryAvatarType.STORY,
+                    avatarSize = StoryAvatarType.HIGHLIGHT_STORY,
                     shouldShowStoryCircle = true,
                     isSeen = true
                 )
@@ -320,7 +322,31 @@ private fun HighlightStories(
         }
 
         item {
-            // todo new highlight item
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.padding(top = 6.dp)
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(StoryAvatarType.HIGHLIGHT_STORY.size + 2.dp)
+                        .border(1.dp, Color.Black, CircleShape),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_plus),
+                        contentDescription = null,
+                        modifier = Modifier.size(18.dp)
+                    )
+                }
+
+                Text(
+                    text = stringResource(id = R.string.t_new),
+                    fontSize = 13.sp,
+                    modifier = Modifier.padding(top = 7.dp)
+                )
+            }
+
+            Spacer(modifier = Modifier.width(14.dp))
         }
     }
 }
