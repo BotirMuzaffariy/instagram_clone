@@ -1,6 +1,7 @@
 package uz.lazydevv.instagramclone.utils
 
 import uz.lazydevv.instagramclone.R
+import uz.lazydevv.instagramclone.models.HighlightStoryM
 import uz.lazydevv.instagramclone.models.MediaM
 import uz.lazydevv.instagramclone.models.StoryM
 import uz.lazydevv.instagramclone.models.UserM
@@ -21,6 +22,13 @@ object MockData {
         StoryM(user = user3, isSeen = false, isEmpty = false),
         StoryM(user = user4, isSeen = false, isEmpty = false),
         StoryM(user = user5, isSeen = true, isEmpty = false),
+    )
+
+    val highlightStories = listOf(
+        HighlightStoryM(img = R.drawable.sample_img1, title = "The king 👑"),
+        HighlightStoryM(img = R.drawable.sample_img3, title = "Keep calm"),
+        HighlightStoryM(img = R.drawable.sample_img4, title = "So angry 😂"),
+        HighlightStoryM(img = R.drawable.sample_img5, title = "Favour"),
     )
 
     val rowMediaItems = listOf(

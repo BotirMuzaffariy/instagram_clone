@@ -12,6 +12,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -33,6 +36,7 @@ import uz.lazydevv.instagramclone.extensions.clickableWithoutRipple
 import uz.lazydevv.instagramclone.ui.global.bottomnav.home.components.StoryAvatar
 import uz.lazydevv.instagramclone.ui.global.bottomnav.home.components.StoryAvatarType
 import uz.lazydevv.instagramclone.ui.theme.Colors
+import uz.lazydevv.instagramclone.utils.MockData
 
 @Composable
 fun ProfileScreen() {
@@ -51,7 +55,7 @@ fun ProfileScreen() {
             }
 
             item {
-                //
+                HighlightStories(modifier = Modifier.padding(0.dp, 20.dp))
             }
         }
     }
@@ -280,6 +284,44 @@ private fun ProfileHeaderActions() {
                 .background(Colors.grayLight, RoundedCornerShape(8.dp))
                 .padding(0.dp, 6.dp)
         )
+    }
+}
+
+@Composable
+private fun HighlightStories(
+    modifier: Modifier = Modifier
+) {
+    val highlightStories = MockData.highlightStories
+
+    LazyRow(
+        modifier = modifier
+    ) {
+        itemsIndexed(highlightStories) { index, story ->
+            if (index == 0) Spacer(modifier = Modifier.width(12.dp))
+
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                StoryAvatar(
+                    avatarImg = story.img,
+                    avatarSize = StoryAvatarType.STORY,
+                    shouldShowStoryCircle = true,
+                    isSeen = true
+                )
+
+                Text(
+                    text = story.title,
+                    fontSize = 13.sp,
+                    modifier = Modifier.padding(top = 2.dp)
+                )
+            }
+
+            Spacer(modifier = Modifier.width(14.dp))
+        }
+
+        item {
+            // todo new highlight item
+        }
     }
 }
 
