@@ -31,7 +31,7 @@ fun Story(story: StoryM) {
         StoryAvatar(
             modifier = Modifier.constrainAs(ivAvatar) {},
             avatarImg = story.user.avatarImg,
-            avatarSize = StoryAvatarSize.LARGE,
+            avatarSize = StoryAvatarType.STORY,
             shouldShowStoryCircle = !story.isEmpty,
             isSeen = story.isSeen
         )

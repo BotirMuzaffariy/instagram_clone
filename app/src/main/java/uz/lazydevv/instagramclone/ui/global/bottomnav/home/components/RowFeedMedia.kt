@@ -103,7 +103,7 @@ private fun MediaTitle(
                 .padding(start = 12.dp)
                 .constrainAs(ivAvatar) {},
             avatarImg = user.avatarImg,
-            avatarSize = StoryAvatarSize.SMALL,
+            avatarSize = StoryAvatarType.POST_HEADER,
             shouldShowStoryCircle = user.hasActiveStory,
             isSeen = false
         )

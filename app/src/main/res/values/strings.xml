@@ -9,5 +9,7 @@
     <string name="profile">Profile</string>
 
     <string name="your_story">Your story</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="share_profile">Share profile</string>
 
 </resources>

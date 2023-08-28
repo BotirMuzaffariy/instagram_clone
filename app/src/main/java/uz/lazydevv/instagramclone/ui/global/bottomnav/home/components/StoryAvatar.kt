@@ -24,12 +24,12 @@ import uz.lazydevv.instagramclone.utils.MockData
 fun StoryAvatar(
     modifier: Modifier = Modifier,
     avatarImg: Int,
-    avatarSize: StoryAvatarSize,
+    avatarSize: StoryAvatarType,
     shouldShowStoryCircle: Boolean = false,
     isSeen: Boolean = false
 ) {
-    val gapSize = if (avatarSize == StoryAvatarSize.LARGE) 12.dp else 6.dp
-    val borderWidth = if (avatarSize == StoryAvatarSize.LARGE) (2.5).dp else 1.dp
+    val gapSize = if (avatarSize == StoryAvatarType.POST_HEADER) 6.dp else 12.dp
+    val borderWidth = if (avatarSize == StoryAvatarType.POST_HEADER) 1.dp else (2.5).dp
 
     Box(
         modifier = modifier,
@@ -64,9 +64,10 @@ fun StoryAvatar(
     }
 }
 
-enum class StoryAvatarSize(val size: Dp) {
-    LARGE(74.dp),
-    SMALL(30.dp)
+enum class StoryAvatarType(val size: Dp) {
+    PROFILE_IMG(80.dp),
+    STORY(74.dp),
+    POST_HEADER(30.dp)
 }
 
 @Preview(showBackground = true)
@@ -76,7 +77,7 @@ private fun StoryAvatarPreview() {
 
     StoryAvatar(
         avatarImg = story.user.avatarImg,
-        avatarSize = StoryAvatarSize.LARGE,
+        avatarSize = StoryAvatarType.STORY,
         shouldShowStoryCircle = !story.isEmpty,
         isSeen = story.isSeen
     )
