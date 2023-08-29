@@ -1,5 +1,6 @@
 package uz.lazydevv.instagramclone.ui.global.bottomnav.profile
 
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -59,6 +60,7 @@ import uz.lazydevv.instagramclone.ui.global.bottomnav.components.StoryAvatarType
 import uz.lazydevv.instagramclone.ui.theme.Colors
 import uz.lazydevv.instagramclone.utils.Constants
 import uz.lazydevv.instagramclone.utils.MockData
+import uz.lazydevv.instagramclone.utils.NoRippleInteractionSource
 import kotlin.random.Random
 
 @Composable
@@ -207,7 +209,7 @@ private fun ProfileHeader() {
             }
         ) {
             InfoContainer(
-                count = "5",
+                count = (MockData.userPosts.sumOf { it.size }).toString(),
                 label = "Posts"
             )
 
@@ -424,9 +426,13 @@ private fun ProfilePosts() {
                     selected = pagerState.currentPage == index,
                     selectedContentColor = Color.Black,
                     unselectedContentColor = Color.Gray,
+                    interactionSource = NoRippleInteractionSource(),
                     onClick = {
                         coroutineScope.launch {
-                            pagerState.animateScrollToPage(index)
+                            pagerState.animateScrollToPage(
+                                page = index,
+                                animationSpec = tween(200)
+                            )
                         }
                     },
                     icon = {
@@ -452,6 +458,7 @@ private fun ProfilePosts() {
         HorizontalPager(
             state = pagerState,
             verticalAlignment = Alignment.Top,
+            beyondBoundsPageCount = 1,
             modifier = Modifier.heightIn(min = minPagerHeight)
         ) { pageIndex ->
             when (pageIndex) {
