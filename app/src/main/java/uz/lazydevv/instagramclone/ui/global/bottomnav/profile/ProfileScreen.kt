@@ -54,6 +54,7 @@ import kotlinx.coroutines.launch
 import uz.lazydevv.instagramclone.R
 import uz.lazydevv.instagramclone.extensions.clickableWithoutRipple
 import uz.lazydevv.instagramclone.models.MediaM
+import uz.lazydevv.instagramclone.ui.global.bottomnav.components.MediaItemReel
 import uz.lazydevv.instagramclone.ui.global.bottomnav.components.MediaItemSquare
 import uz.lazydevv.instagramclone.ui.global.bottomnav.components.StoryAvatar
 import uz.lazydevv.instagramclone.ui.global.bottomnav.components.StoryAvatarType
@@ -214,7 +215,7 @@ private fun ProfileHeader() {
             )
 
             InfoContainer(
-                count = "527M",
+                count = "6,1B",
                 label = "Followers"
             )
 
@@ -530,7 +531,59 @@ private fun PostsRowMediaItem(items: List<MediaM>) {
 
 @Composable
 private fun PageUserReels() {
-    //
+    val items = MockData.userReels
+
+    Column {
+        items.forEach { posts ->
+            ReelsRowMediaItem(items = posts)
+            Spacer(modifier = Modifier.height(Constants.mediaItemsSpacing))
+        }
+    }
+}
+
+@Composable
+private fun ReelsRowMediaItem(items: List<MediaM>) {
+    ConstraintLayout(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        val (content1, content2, content3) = createRefs()
+
+        MediaItemReel(
+            image = items.getOrNull(0)?.postImg,
+            viewsCount = "${Random.nextInt(500, 1000)}M",
+            modifier = Modifier.constrainAs(content1) {
+                width = Dimension.fillToConstraints
+
+                start.linkTo(parent.start)
+                end.linkTo(content2.start)
+                top.linkTo(parent.top)
+            }
+        )
+
+        MediaItemReel(
+            image = items.getOrNull(1)?.postImg,
+            viewsCount = "${Random.nextInt(500, 1000)}M",
+            modifier = Modifier.constrainAs(content2) {
+                width = Dimension.fillToConstraints
+
+                top.linkTo(content1.top)
+                start.linkTo(content1.end, Constants.mediaItemsSpacing)
+                end.linkTo(content3.start, Constants.mediaItemsSpacing)
+            }
+        )
+
+        MediaItemReel(
+            image = items.getOrNull(2)?.postImg,
+            viewsCount = "${Random.nextInt(500, 1000)}M",
+            modifier = Modifier.constrainAs(content3) {
+                width = Dimension.fillToConstraints
+
+                start.linkTo(content2.end)
+                end.linkTo(parent.end)
+                top.linkTo(content1.top)
+            }
+        )
+    }
 }
 
 @Composable

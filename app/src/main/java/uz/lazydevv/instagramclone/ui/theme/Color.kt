@@ -20,4 +20,6 @@ object Colors {
 
     val bgSearch = Color(0xFFEFEFEF)
     val onBgSearch = Color(0xFF6C6C6C)
+
+    val black80 = Color(0x80000000)
 }

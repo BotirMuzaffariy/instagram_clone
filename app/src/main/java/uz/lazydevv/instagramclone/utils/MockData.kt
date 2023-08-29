@@ -50,4 +50,6 @@ object MockData {
     val userPosts = rowMediaItems.asSequence().shuffled()
         .plus(rowMediaItems.shuffled())
         .chunked(3).toList()
+
+    val userReels = listOf(rowMediaItems.first(), rowMediaItems.last()).chunked(3)
 }

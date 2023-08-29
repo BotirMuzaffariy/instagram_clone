@@ -48,6 +48,6 @@ fun MediaItemSquare(
 
 @Preview(showBackground = true)
 @Composable
-private fun SquareMediaItemPreview() {
+private fun MediaItemSquarePreview() {
     MediaItemSquare(image = R.drawable.sample_img1)
 }
