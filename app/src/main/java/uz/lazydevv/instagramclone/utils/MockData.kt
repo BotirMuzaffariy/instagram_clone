@@ -46,4 +46,8 @@ object MockData {
         .plus(rowMediaItems.shuffled())
         .plus(rowMediaItems.shuffled())
         .chunked(5).toList()
+
+    val userPosts = rowMediaItems.asSequence().shuffled()
+        .plus(rowMediaItems.shuffled())
+        .chunked(3).toList()
 }

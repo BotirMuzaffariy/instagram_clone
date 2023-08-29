@@ -1,4 +1,4 @@
-package uz.lazydevv.instagramclone.ui.global.bottomnav.home.components
+package uz.lazydevv.instagramclone.ui.global.bottomnav.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border

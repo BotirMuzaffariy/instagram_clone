@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -18,6 +19,7 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
@@ -30,10 +32,14 @@ import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -46,17 +52,35 @@ import androidx.constraintlayout.compose.Dimension
 import kotlinx.coroutines.launch
 import uz.lazydevv.instagramclone.R
 import uz.lazydevv.instagramclone.extensions.clickableWithoutRipple
-import uz.lazydevv.instagramclone.ui.global.bottomnav.home.components.StoryAvatar
-import uz.lazydevv.instagramclone.ui.global.bottomnav.home.components.StoryAvatarType
+import uz.lazydevv.instagramclone.models.MediaM
+import uz.lazydevv.instagramclone.ui.global.bottomnav.components.MediaItemSquare
+import uz.lazydevv.instagramclone.ui.global.bottomnav.components.StoryAvatar
+import uz.lazydevv.instagramclone.ui.global.bottomnav.components.StoryAvatarType
 import uz.lazydevv.instagramclone.ui.theme.Colors
+import uz.lazydevv.instagramclone.utils.Constants
 import uz.lazydevv.instagramclone.utils.MockData
+import kotlin.random.Random
 
 @Composable
 fun ProfileScreen() {
+    val lazyListState = rememberLazyListState()
+
+    val shouldShowDivider by remember {
+        derivedStateOf {
+            lazyListState.firstVisibleItemIndex != 0
+        }
+    }
+
     Column(modifier = Modifier.fillMaxSize()) {
         ProfileActionBar()
 
-        LazyColumn {
+        if (shouldShowDivider) Divider(thickness = .5.dp)
+
+        LazyColumn(state = lazyListState) {
+            item {
+                Spacer(modifier = Modifier.height(.2.dp))
+            }
+
             item {
                 ProfileHeader()
             }
@@ -188,7 +212,7 @@ private fun ProfileHeader() {
             )
 
             InfoContainer(
-                count = "571M",
+                count = "527M",
                 label = "Followers"
             )
 
@@ -305,9 +329,7 @@ private fun ProfileHeaderActions() {
 }
 
 @Composable
-private fun HighlightStories(
-    modifier: Modifier = Modifier
-) {
+private fun HighlightStories(modifier: Modifier = Modifier) {
     val highlightStories = MockData.highlightStories
 
     LazyRow(
@@ -372,6 +394,8 @@ private fun ProfilePosts() {
     val coroutineScope = rememberCoroutineScope()
     val pagerState = rememberPagerState(pageCount = { 3 })
 
+    val minPagerHeight = (LocalConfiguration.current.screenHeightDp * 0.8).dp
+
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {
@@ -423,7 +447,13 @@ private fun ProfilePosts() {
             }
         }
 
-        HorizontalPager(state = pagerState) { pageIndex ->
+        Spacer(modifier = Modifier.height(2.dp))
+
+        HorizontalPager(
+            state = pagerState,
+            verticalAlignment = Alignment.Top,
+            modifier = Modifier.heightIn(min = minPagerHeight)
+        ) { pageIndex ->
             when (pageIndex) {
                 0 -> PageUserPosts()
                 1 -> PageUserReels()
@@ -436,7 +466,59 @@ private fun ProfilePosts() {
 
 @Composable
 private fun PageUserPosts() {
-    //
+    val items = MockData.userPosts
+
+    Column {
+        items.forEach { posts ->
+            PostsRowMediaItem(items = posts)
+            Spacer(modifier = Modifier.height(Constants.mediaItemsSpacing))
+        }
+    }
+}
+
+@Composable
+private fun PostsRowMediaItem(items: List<MediaM>) {
+    ConstraintLayout(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        val (content1, content2, content3) = createRefs()
+
+        MediaItemSquare(
+            image = items.getOrNull(0)?.postImg,
+            isShowVideoIcon = Random.nextBoolean(),
+            modifier = Modifier.constrainAs(content1) {
+                width = Dimension.fillToConstraints
+
+                start.linkTo(parent.start)
+                end.linkTo(content2.start)
+                top.linkTo(parent.top)
+            }
+        )
+
+        MediaItemSquare(
+            image = items.getOrNull(1)?.postImg,
+            isShowVideoIcon = Random.nextBoolean(),
+            modifier = Modifier.constrainAs(content2) {
+                width = Dimension.fillToConstraints
+
+                top.linkTo(content1.top)
+                start.linkTo(content1.end, Constants.mediaItemsSpacing)
+                end.linkTo(content3.start, Constants.mediaItemsSpacing)
+            }
+        )
+
+        MediaItemSquare(
+            image = items.getOrNull(2)?.postImg,
+            isShowVideoIcon = Random.nextBoolean(),
+            modifier = Modifier.constrainAs(content3) {
+                width = Dimension.fillToConstraints
+
+                start.linkTo(content2.end)
+                end.linkTo(parent.end)
+                top.linkTo(content1.top)
+            }
+        )
+    }
 }
 
 @Composable

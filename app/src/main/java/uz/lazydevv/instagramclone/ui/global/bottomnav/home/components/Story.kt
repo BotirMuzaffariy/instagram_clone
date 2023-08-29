@@ -18,6 +18,8 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import uz.lazydevv.instagramclone.R
 import uz.lazydevv.instagramclone.models.StoryM
+import uz.lazydevv.instagramclone.ui.global.bottomnav.components.StoryAvatar
+import uz.lazydevv.instagramclone.ui.global.bottomnav.components.StoryAvatarType
 import uz.lazydevv.instagramclone.utils.MockData
 
 @Composable

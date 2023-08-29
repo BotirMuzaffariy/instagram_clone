@@ -34,6 +34,8 @@ import uz.lazydevv.instagramclone.R
 import uz.lazydevv.instagramclone.extensions.clickableWithoutRipple
 import uz.lazydevv.instagramclone.models.MediaM
 import uz.lazydevv.instagramclone.models.UserM
+import uz.lazydevv.instagramclone.ui.global.bottomnav.components.StoryAvatar
+import uz.lazydevv.instagramclone.ui.global.bottomnav.components.StoryAvatarType
 import uz.lazydevv.instagramclone.utils.MockData
 import kotlin.random.Random
 
