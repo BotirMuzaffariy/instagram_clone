@@ -1,5 +1,6 @@
 package uz.lazydevv.instagramclone.ui.global.bottomnav.profile
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -13,14 +14,23 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
+import androidx.compose.material3.TabRowDefaults
+import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -33,6 +43,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
+import kotlinx.coroutines.launch
 import uz.lazydevv.instagramclone.R
 import uz.lazydevv.instagramclone.extensions.clickableWithoutRipple
 import uz.lazydevv.instagramclone.ui.global.bottomnav.home.components.StoryAvatar
@@ -58,6 +69,10 @@ fun ProfileScreen() {
 
             item {
                 HighlightStories(modifier = Modifier.padding(0.dp, 20.dp))
+            }
+
+            item {
+                ProfilePosts()
             }
         }
     }
@@ -349,6 +364,89 @@ private fun HighlightStories(
             Spacer(modifier = Modifier.width(14.dp))
         }
     }
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+private fun ProfilePosts() {
+    val coroutineScope = rememberCoroutineScope()
+    val pagerState = rememberPagerState(pageCount = { 3 })
+
+    Column(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        TabRow(
+            selectedTabIndex = pagerState.currentPage,
+            containerColor = Color.Transparent,
+            divider = {
+                Divider(
+                    thickness = .5.dp
+                )
+            },
+            indicator = { tabPositions ->
+                TabRowDefaults.Indicator(
+                    height = 1.2.dp,
+                    color = Color.Black,
+                    modifier = Modifier
+                        .tabIndicatorOffset(tabPositions[pagerState.currentPage])
+                )
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+        ) {
+            repeat(3) { index ->
+                Tab(
+                    selected = pagerState.currentPage == index,
+                    selectedContentColor = Color.Black,
+                    unselectedContentColor = Color.Gray,
+                    onClick = {
+                        coroutineScope.launch {
+                            pagerState.animateScrollToPage(index)
+                        }
+                    },
+                    icon = {
+                        Icon(
+                            painter = painterResource(
+                                id = when (index) {
+                                    0 -> R.drawable.ic_grid
+                                    1 -> R.drawable.ic_reels
+                                    2 -> R.drawable.ic_tagged_user
+                                    else -> R.drawable.ic_grid
+                                }
+                            ),
+                            contentDescription = null,
+                            modifier = Modifier.size(24.dp)
+                        )
+                    }
+                )
+            }
+        }
+
+        HorizontalPager(state = pagerState) { pageIndex ->
+            when (pageIndex) {
+                0 -> PageUserPosts()
+                1 -> PageUserReels()
+                2 -> PageTaggedPosts()
+                else -> Unit
+            }
+        }
+    }
+}
+
+@Composable
+private fun PageUserPosts() {
+    //
+}
+
+@Composable
+private fun PageUserReels() {
+    //
+}
+
+@Composable
+private fun PageTaggedPosts() {
+    //
 }
 
 @Preview(showSystemUi = true, device = "id:pixel_3a")
