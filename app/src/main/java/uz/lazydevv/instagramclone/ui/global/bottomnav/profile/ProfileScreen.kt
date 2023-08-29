@@ -22,6 +22,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PagerDefaults
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -46,6 +47,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -460,12 +462,16 @@ private fun ProfilePosts() {
             state = pagerState,
             verticalAlignment = Alignment.Top,
             beyondBoundsPageCount = 1,
+            flingBehavior = PagerDefaults.flingBehavior(
+                state = pagerState,
+                snapAnimationSpec = tween(200)
+            ),
             modifier = Modifier.heightIn(min = minPagerHeight)
         ) { pageIndex ->
             when (pageIndex) {
                 0 -> PageUserPosts()
                 1 -> PageUserReels()
-                2 -> PageTaggedPosts()
+                2 -> PageTaggedPosts(minPagerHeight)
                 else -> Unit
             }
         }
@@ -587,8 +593,39 @@ private fun ReelsRowMediaItem(items: List<MediaM>) {
 }
 
 @Composable
-private fun PageTaggedPosts() {
-    //
+private fun PageTaggedPosts(minPagerHeight: Dp) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(top = minPagerHeight / 3.6f)
+    ) {
+        Icon(
+            painter = painterResource(id = R.drawable.ic_tag_circle),
+            contentDescription = null,
+            modifier = Modifier.size(96.dp)
+        )
+
+        Spacer(modifier = Modifier.height(6.dp))
+
+        Text(
+            text = stringResource(id = R.string.empty_tagged_title),
+            fontSize = 24.sp,
+            fontWeight = FontWeight.SemiBold,
+            textAlign = TextAlign.Center,
+            lineHeight = 28.sp
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Text(
+            text = stringResource(id = R.string.empty_tagged_body),
+            fontSize = 15.sp,
+            color = Color.Gray,
+            textAlign = TextAlign.Center
+        )
+    }
 }
 
 @Preview(showSystemUi = true, device = "id:pixel_3a")

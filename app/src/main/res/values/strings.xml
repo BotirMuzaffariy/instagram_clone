@@ -12,5 +12,7 @@
     <string name="edit_profile">Edit profile</string>
     <string name="share_profile">Share profile</string>
     <string name="t_new">New</string>
+    <string name="empty_tagged_title">Photos and\nvideos of you</string>
+    <string name="empty_tagged_body">When people tag you in photos and\nvideos, they\'ll appear here.</string>
 
 </resources>

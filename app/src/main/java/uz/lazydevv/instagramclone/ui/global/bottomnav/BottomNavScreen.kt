@@ -1,5 +1,7 @@
 package uz.lazydevv.instagramclone.ui.global.bottomnav
 
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -57,7 +59,11 @@ fun BottomNavScreen() {
         NavHost(
             modifier = Modifier.padding(it),
             navController = navController,
-            startDestination = BottomNavItem.Home.route
+            startDestination = BottomNavItem.Home.route,
+            enterTransition = { EnterTransition.None },
+            exitTransition = { ExitTransition.None },
+            popEnterTransition = { EnterTransition.None },
+            popExitTransition = { ExitTransition.None }
         ) {
             composable(BottomNavItem.Home.route) {
                 HomeScreen()
