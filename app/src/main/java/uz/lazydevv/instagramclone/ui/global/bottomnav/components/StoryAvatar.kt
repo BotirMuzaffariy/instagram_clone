@@ -28,8 +28,17 @@ fun StoryAvatar(
     shouldShowStoryCircle: Boolean = false,
     isSeen: Boolean = false
 ) {
-    val gapSize = if (avatarSize == StoryAvatarType.POST_HEADER) 6.dp else 12.dp
-    val borderWidth = if (avatarSize == StoryAvatarType.POST_HEADER) 1.dp else (2.5).dp
+    val gapSize = when (avatarSize) {
+        StoryAvatarType.POST_HEADER -> 6.dp
+        StoryAvatarType.REEL_AUTHOR_INFO -> 10.dp
+        else -> 12.dp
+    }
+
+    val borderWidth = when (avatarSize) {
+        StoryAvatarType.POST_HEADER -> 1.dp
+        StoryAvatarType.REEL_AUTHOR_INFO -> 1.5.dp
+        else -> 2.5.dp
+    }
 
     Box(
         modifier = modifier,
@@ -68,7 +77,8 @@ enum class StoryAvatarType(val size: Dp) {
     PROFILE_IMG(80.dp),
     STORY(74.dp),
     HIGHLIGHT_STORY(62.dp),
-    POST_HEADER(30.dp)
+    POST_HEADER(30.dp),
+    REEL_AUTHOR_INFO(38.dp),
 }
 
 @Preview(showBackground = true)

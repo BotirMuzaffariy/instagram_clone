@@ -52,7 +52,7 @@ fun MediaItemReel(
                     .align(Alignment.BottomCenter)
                     .background(
                         brush = Brush.linearGradient(
-                            colors = listOf(Colors.black80, Color.Transparent),
+                            colors = listOf(Colors.black50, Color.Transparent),
                             start = Offset(0f, Float.POSITIVE_INFINITY),
                             end = Offset.Zero
                         )
