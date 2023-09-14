@@ -54,12 +54,12 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import kotlinx.coroutines.launch
 import uz.lazydevv.instagramclone.R
-import uz.lazydevv.instagramclone.extensions.clickableWithoutRipple
 import uz.lazydevv.instagramclone.models.MediaM
 import uz.lazydevv.instagramclone.ui.global.bottomnav.components.MediaItemReel
 import uz.lazydevv.instagramclone.ui.global.bottomnav.components.MediaItemSquare
 import uz.lazydevv.instagramclone.ui.global.bottomnav.components.StoryAvatar
 import uz.lazydevv.instagramclone.ui.global.bottomnav.components.StoryAvatarType
+import uz.lazydevv.instagramclone.ui.global.components.UsernameActionBar
 import uz.lazydevv.instagramclone.ui.theme.Colors
 import uz.lazydevv.instagramclone.utils.Constants
 import uz.lazydevv.instagramclone.utils.MockData
@@ -77,7 +77,10 @@ fun ProfileScreen() {
     }
 
     Column(modifier = Modifier.fillMaxSize()) {
-        ProfileActionBar()
+        UsernameActionBar(
+            btn1Icon = R.drawable.ic_add_box,
+            btn2Icon = R.drawable.ic_menu,
+        )
 
         if (shouldShowDivider) Divider(thickness = .5.dp)
 
@@ -104,76 +107,6 @@ fun ProfileScreen() {
                 ProfilePosts()
             }
         }
-    }
-}
-
-@Composable
-private fun ProfileActionBar(
-    modifier: Modifier = Modifier,
-    onCreateClick: () -> Unit = {},
-    onOptionsClick: () -> Unit = {}
-) {
-    ConstraintLayout(
-        modifier = modifier
-            .fillMaxWidth()
-            .height(56.dp)
-    ) {
-        val (tvUsername, iv0, ivCreate, ivOptions) = createRefs()
-
-        Text(
-            text = "lazydevv",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.SemiBold,
-            modifier = Modifier.constrainAs(tvUsername) {
-                start.linkTo(parent.start, 16.dp)
-                top.linkTo(parent.top)
-                bottom.linkTo(parent.bottom)
-            }
-        )
-
-        Icon(
-            painter = painterResource(id = R.drawable.ic_keyboard_arrow_down),
-            contentDescription = null,
-            modifier = Modifier
-                .size(16.dp)
-                .constrainAs(iv0) {
-                    start.linkTo(tvUsername.end, 4.dp)
-                    top.linkTo(tvUsername.top, 4.dp)
-                    bottom.linkTo(tvUsername.bottom)
-                }
-        )
-
-        Icon(
-            painter = painterResource(id = R.drawable.ic_add_box),
-            contentDescription = null,
-            modifier = Modifier
-                .clickableWithoutRipple { onCreateClick() }
-                .constrainAs(ivCreate) {
-                    height = Dimension.matchParent
-                    width = Dimension.ratio("H, 1:0.8")
-
-                    top.linkTo(tvUsername.top)
-                    bottom.linkTo(tvUsername.bottom)
-                    end.linkTo(ivOptions.start)
-                }
-                .padding(9.dp)
-        )
-
-        Icon(
-            painter = painterResource(id = R.drawable.ic_menu),
-            contentDescription = null,
-            modifier = Modifier
-                .clickableWithoutRipple { onOptionsClick() }
-                .constrainAs(ivOptions) {
-                    height = Dimension.matchParent
-                    width = Dimension.ratio("H, 1:0.8")
-
-                    top.linkTo(tvUsername.top)
-                    bottom.linkTo(tvUsername.bottom)
-                    end.linkTo(parent.end, 8.dp)
-                }
-                .padding(10.dp)
-        )
     }
 }
 

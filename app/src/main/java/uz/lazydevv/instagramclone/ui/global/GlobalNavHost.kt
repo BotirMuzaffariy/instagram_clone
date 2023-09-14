@@ -1,5 +1,7 @@
 package uz.lazydevv.instagramclone.ui.global
 
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -11,14 +13,18 @@ import uz.lazydevv.instagramclone.ui.global.messenger.MessengerScreen
 fun GlobalNavHost(navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = GlobalScreens.BottomNavScreen.route
+        startDestination = GlobalScreens.BottomNavScreen.route,
+        enterTransition = { EnterTransition.None },
+        exitTransition = { ExitTransition.None },
+        popEnterTransition = { EnterTransition.None },
+        popExitTransition = { ExitTransition.None }
     ) {
         composable(GlobalScreens.BottomNavScreen.route) {
-            BottomNavScreen()
+            BottomNavScreen(navController)
         }
 
         composable(GlobalScreens.Messenger.route) {
-            MessengerScreen()
+            MessengerScreen(navController)
         }
     }
 }

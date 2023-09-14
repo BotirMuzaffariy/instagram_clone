@@ -14,13 +14,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import uz.lazydevv.instagramclone.ui.global.GlobalScreens
 import uz.lazydevv.instagramclone.ui.global.bottomnav.home.components.HomeActionBar
 import uz.lazydevv.instagramclone.ui.global.bottomnav.home.components.RowFeedMedia
 import uz.lazydevv.instagramclone.ui.global.bottomnav.home.components.Story
 import uz.lazydevv.instagramclone.utils.MockData
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    globalNavHostController: NavHostController
+) {
     LazyColumn(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -31,7 +36,7 @@ fun HomeScreen() {
                     // todo
                 },
                 onMessengerClick = {
-                    // todo
+                    globalNavHostController.navigate(GlobalScreens.Messenger.route)
                 }
             )
         }
@@ -72,5 +77,5 @@ fun HomeScreen() {
 @Preview(showSystemUi = true, device = "id:pixel_3a")
 @Composable
 private fun HomeScreenPreview() {
-    HomeScreen()
+    HomeScreen(rememberNavController())
 }

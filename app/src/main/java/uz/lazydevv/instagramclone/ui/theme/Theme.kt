@@ -41,7 +41,7 @@ private val LightColorScheme = lightColorScheme(
     */
 )
 
-lateinit var myColorScheme: ColorScheme
+var myColorScheme: ColorScheme = LightColorScheme
 
 @Composable
 fun InstagramCloneTheme(

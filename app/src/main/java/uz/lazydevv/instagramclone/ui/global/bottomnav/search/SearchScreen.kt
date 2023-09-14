@@ -1,36 +1,28 @@
 package uz.lazydevv.instagramclone.ui.global.bottomnav.search
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import uz.lazydevv.instagramclone.R
 import uz.lazydevv.instagramclone.models.MediaM
 import uz.lazydevv.instagramclone.ui.global.bottomnav.components.MediaItemSquare
-import uz.lazydevv.instagramclone.ui.theme.Colors
+import uz.lazydevv.instagramclone.ui.global.components.CustomSearchBar
 import uz.lazydevv.instagramclone.utils.Constants
 import uz.lazydevv.instagramclone.utils.MockData
 import kotlin.random.Random
@@ -56,34 +48,6 @@ fun SearchScreen() {
 
             Spacer(modifier = Modifier.height(Constants.mediaItemsSpacing))
         }
-    }
-}
-
-@Composable
-private fun CustomSearchBar() {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(14.dp, 0.dp)
-            .background(Colors.bgSearch, RoundedCornerShape(10.dp))
-            .padding(12.dp, 8.dp)
-    ) {
-        Icon(
-            painter = painterResource(id = R.drawable.ic_search),
-            contentDescription = null,
-            modifier = Modifier
-                .size(24.dp)
-                .padding(4.dp)
-        )
-
-        Spacer(modifier = Modifier.width(8.dp))
-
-        Text(
-            text = stringResource(id = R.string.search),
-            color = Colors.onBgSearch,
-            fontSize = 16.sp
-        )
     }
 }
 

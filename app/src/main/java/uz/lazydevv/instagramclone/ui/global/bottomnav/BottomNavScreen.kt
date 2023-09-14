@@ -40,7 +40,9 @@ import uz.lazydevv.instagramclone.ui.global.bottomnav.search.SearchScreen
 import uz.lazydevv.instagramclone.ui.theme.myColorScheme
 
 @Composable
-fun BottomNavScreen() {
+fun BottomNavScreen(
+    globalNavHostController: NavHostController
+) {
     val navController = rememberNavController()
 
     val bottomNavItems = listOf(
@@ -57,7 +59,9 @@ fun BottomNavScreen() {
         }
     ) {
         NavHost(
-            modifier = Modifier.padding(it),
+            modifier = Modifier
+                .padding(it)
+                .background(myColorScheme.background),
             navController = navController,
             startDestination = BottomNavItem.Home.route,
             enterTransition = { EnterTransition.None },
@@ -66,7 +70,7 @@ fun BottomNavScreen() {
             popExitTransition = { ExitTransition.None }
         ) {
             composable(BottomNavItem.Home.route) {
-                HomeScreen()
+                HomeScreen(globalNavHostController)
             }
 
             composable(BottomNavItem.Search.route) {
@@ -176,5 +180,5 @@ private fun BottomNavigationItem(
 @Preview(showSystemUi = true, device = "id:pixel_3a")
 @Composable
 private fun BottomNavScreenPreview() {
-    BottomNavScreen()
+    BottomNavScreen(rememberNavController())
 }

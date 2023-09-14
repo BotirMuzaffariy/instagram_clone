@@ -79,6 +79,7 @@ enum class StoryAvatarType(val size: Dp) {
     HIGHLIGHT_STORY(62.dp),
     POST_HEADER(30.dp),
     REEL_AUTHOR_INFO(38.dp),
+    MESSAGE_HEADER(52.dp)
 }
 
 @Preview(showBackground = true)

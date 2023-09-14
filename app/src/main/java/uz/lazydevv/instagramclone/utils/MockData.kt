@@ -3,6 +3,7 @@ package uz.lazydevv.instagramclone.utils
 import uz.lazydevv.instagramclone.R
 import uz.lazydevv.instagramclone.models.HighlightStoryM
 import uz.lazydevv.instagramclone.models.MediaM
+import uz.lazydevv.instagramclone.models.MessageM
 import uz.lazydevv.instagramclone.models.StoryM
 import uz.lazydevv.instagramclone.models.UserM
 
@@ -52,4 +53,19 @@ object MockData {
         .chunked(3).toList()
 
     val userReels = listOf(rowMediaItems.first(), rowMediaItems.last()).chunked(3)
+
+    val messages = listOf(
+        MessageM(user = user5, lastMessage = "2 new messages", timeStamp = "1d", isSeen = false),
+        MessageM(user = user2, lastMessage = "Sent a reel by abrormuxtoraliy", timeStamp = "3d", isSeen = false),
+        MessageM(user = user3, lastMessage = "Sent a reel by sheyhzade", timeStamp = "4d"),
+        MessageM(user = user4, lastMessage = "Ha", timeStamp = "5d", isSeen = false),
+        MessageM(user = user5, lastMessage = "Yes, you can )", timeStamp = "1w"),
+        MessageM(user = user3, lastMessage = "Sent a reel by mehrob.uz", timeStamp = "2w"),
+        MessageM(user = user2, lastMessage = "Ok", timeStamp = "2w"),
+        MessageM(user = user3, lastMessage = "Seen", timeStamp = "3w"),
+        MessageM(user = user4, lastMessage = "Sent a reel by joxa1909", timeStamp = "4w"),
+        MessageM(user = user5, lastMessage = "Xa", timeStamp = "4w"),
+        MessageM(user = user4, lastMessage = "Seen", timeStamp = "5w"),
+        MessageM(user = user2, lastMessage = "Sent a reel by qibrat.al", timeStamp = "6w"),
+    )
 }
