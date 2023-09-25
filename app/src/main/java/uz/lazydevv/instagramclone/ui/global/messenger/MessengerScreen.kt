@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -74,6 +75,10 @@ fun MessengerScreen(
         if (shouldShowDivider) Divider(thickness = .5.dp)
 
         LazyColumn(state = lazyListState) {
+            item {
+                Spacer(modifier = Modifier.height(.2.dp))
+            }
+
             item {
                 CustomSearchBar(
                     modifier = Modifier.padding(0.dp, 12.dp)
