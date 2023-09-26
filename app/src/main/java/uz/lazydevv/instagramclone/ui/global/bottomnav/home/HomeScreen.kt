@@ -33,7 +33,7 @@ fun HomeScreen(
             HomeActionBar(
                 modifier = Modifier.fillMaxWidth(),
                 onNewsClick = {
-                    // todo
+                    globalNavHostController.navigate(GlobalScreens.News.route)
                 },
                 onMessengerClick = {
                     globalNavHostController.navigate(GlobalScreens.Messenger.route)
